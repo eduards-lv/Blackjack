@@ -55,10 +55,10 @@ def compare(user_score, computer_score):
 
 
 def showusercards():
-    print("Your cards:", user_cards)
+    print("Your cards:", user_cards, "Score:", calculate_score(user_cards))
 
 def showcomputercards():
-    print("Dealer cards:", computer_cards)
+    print("Dealer cards:", computer_cards, "Score:", calculate_score(computer_cards))
 
 
 def play_game():
