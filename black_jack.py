@@ -49,28 +49,55 @@ def calculate_score(cards):
 
 
 def compare(user_score, computer_score):
-    if user_score>computer_score: return 1
+    if user_score>computer_score or computer_score>21: return 1
     if user_score==computer_score: return 0
     return -1
 
 
+def showusercards():
+    print("Your cards:", user_cards)
+
+def showcomputercards():
+    print("Dealer cards:", computer_cards)
 
 
 def play_game():
+    user_cards.clear()
+    computer_cards.clear()
     user_cards.append(deal_card())
     user_cards.append(deal_card())
     computer_cards.append(deal_card())
     computer_cards.append(deal_card())
-    if calculate_score(cards)==21:
+    if calculate_score(user_cards)==21:
         if calculate_score(computer_cards)==21: 
             print("Draw")
         else:
             print("You lost")
         return
+    user_score=0
+    showusercards()
     while input("Do you want another card? Type 'y' or anything else for no: ") == "y":
         user_cards.append(deal_card())
-        if calculate_score(user_cards)>=21: break
+        showusercards()
+        user_score=calculate_score(user_cards)
+        if user_score>=21: break
+    if user_score>21:
+        print("You lost")
+        return 
+    computer_score=calculate_score(computer_cards)
+    if user_score==21 and computer_score<21:
+        print("You won")
+        return
+    while computer_score<17:
+        computer_cards.append(deal_card())
+        computer_score=calculate_score(computer_cards)
+    showcomputercards()
+    winner=compare(user_score, computer_score)
+    if winner==1: print("You won")
+    elif winner==-1: print("You lost")
+    else: print("Draw")
     
+
 
     
 
